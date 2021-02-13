@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="site-wrap">
+{% include 'header.html' %}
+<div class="site-section bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-5 mb-md-0" data-aos="fade-up" data-aos-delay="100">
+          <h2 class="mb-5 h3">Education</h2>
+          <div class="rounded border jobs-wrap">
+            {% for education in education_queryset %}
+            <div class="job-item d-block d-md-flex align-items-center  border-bottom fulltime">
+              <div class="company-logo blank-logo text-center text-md-left pl-3">
+                <img src="{% static 'jobfinder/images/company_logo_blank.png' %}" alt="Image" class="img-fluid mx-auto">
+              </div>
+              <div class="job-details h-100">
+                <div class="p-3 align-self-center">
+                  <h3>{{education.course}}</h3>
+                  <div class="d-block d-lg-flex">
+                    <!-- <div class="mr-3"><span class="icon-suitcase mr-1"></span> Resto Bar</div> -->
+                    <div class="mr-3"><span class="icon-room mr-1"></span> {{education.institution}}</div><br>
+                    <div class="mr-3">since {{education.since}} &mdash; {{education.to}}</div>
+                </div>
+                </div>
+              </div>
+              <div class="job-category align-self-center">
+                <div class="p-3">
+                  <a href="?delete={{education.id}}"><button class="text-info p-2 rounded border border-info">Delete</button></a>
+                </div>
+              </div>  
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="col-md-12 text-center mt-5">
+            <button class="btn btn-primary rounded py-3 px-5" data-toggle="modal" data-target="#exampleModal"><span class="icon-plus-circle"></span> Add Education</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method = 'POST'>{% csrf_token %}
+            <div style="margin: 10px;">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">course studied</label>
+                    <input required name="course" type="text" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">institution</label>
+                    <input required name="institution" type="text" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">since</label>
+                    <input required name="since" type="date" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">till</label>
+                    <input required name="till" type="date" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  <!-- modeal end  -->
+{% include 'footer.html' %}
+</div>
+{% endblock content %}

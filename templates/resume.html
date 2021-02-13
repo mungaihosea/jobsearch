@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'resume/resume.css' %}">
+{% endblock head %}
+{% block content %}
+    <div class="page">
+        <button id="print" onclick="window.print()" class="btn btn-primary btn-sm">Print</button>
+    <div id="invoice" class="section row">
+        <h1 class="col"><span style="font-weight:700">{{request.user.first_name}}</span> {{request.user.last_name}}</h1>
+        <div class="contact-info col-right">
+            <div>201 . 920 . 0729</div>
+            <div><a href="mailto:jugalm@nyu.edu">{{request.user.email}}</a></div>
+            
+        </div>
+    </div>
+    <div class="section row">
+        <h2 class="col">Interests</h2>
+        <div class="section-text col-right">{% for interest in interest_queryset %}<span class="key">{{interest.interest}}</span>{% endfor %} </div>
+    </div>
+    <div class="section row">
+        <h2 class="col">Skills</h2>
+        <div class="section-text col-right row">
+            <ul class="skills" style="width:25%">
+                {% for skill in skill_queryset %}
+                <li>{{skill.skill}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="section row">
+        <h2 class="col">Education</h2>
+        {% for education in education_queryset %}
+        <div class="section-text col-right">
+            <h3>{{education.course}}</h3>
+            <div>{{education.institution}}</div>
+            <div class="row">
+                <div class="col light">{{education.location}}</div>
+                <div class="col-right light">{{education.since}} - {{education.to}}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="section row">
+        <h2 class="col">Experience</h2>
+        {% for experience in experience_queryset %}
+        <div class="section-text col-right">
+            <div class="row">
+                <div class="col">
+                    <h3>{{experience.company}}</h3>
+                </div>
+            </div>
+            <div class="row subsection">
+                <div class="emph col">{{experience.job_title}}</div>
+                <div class="col-right light">{{experience.since}} - {{experience.to}}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="section row">
+        <h2 class="col">Projects</h2>
+        {% for project in project_queryset %}
+        <div class="section-text col-right">
+            <h3><a href="{{project.link}}">{{project.link}}</a></h3>
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+
+{% endblock content %}

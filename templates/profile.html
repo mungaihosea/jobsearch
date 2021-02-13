@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="site-wrap">
+
+    {% include 'header.html' %}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div style="margin: 10px;">
+      <h3>What would you like to edit ?</h3>
+      <a href="{% url 'interests' %}"><span class="btn btn-primary  py-2 px-4 m-2">Interests</span></a><br>
+      <a href="{% url 'skills' %}"><span class="btn btn-primary  py-2 px-4 m-2">Skills</span></a><br>
+      <a href="{% url 'education' %}"><span class="btn btn-primary  py-2 px-4 m-2">Education</span></a><br>
+      <a href="{% url 'experience' %}"><span class="btn btn-primary  py-2 px-4 m-2">Experience</span></a><br>
+      <a href="{% url 'projects' %}"><span class="btn btn-primary  py-2 px-4 m-2">Projects</span></a><br>
+      
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal end  -->
+
+    <div style="height: 113px;"></div>
+
+    <div class="unit-5 overlay" style="background-image: url('{% static 'jobfinder/images/hero_2.jpg' %}');">
+      <div class="container text-center">
+        <h2 class="mb-0">Account Profile</h2>
+        <p class="mb-0 unit-6"><a href="index.html">Home</a> <span class="sep">></span> <span>account profile</span></p>
+      </div>
+    </div>
+
+    <div class="site-section bg-light">
+      <div class="container">
+        <div class="row">
+       
+          <div class="col-md-12 col-lg-8 mb-5">
+          
+            <div class="p-5 bg-white">
+
+              <div class="mb-4 mb-md-5 mr-5">
+               <div class="job-post-item-header d-flex align-items-center">
+                 <h2 class="mr-3 text-black h4">{{request.user.first_name}} {{request.user.last_name}}</h2>
+                 <div class="badge-wrap">
+                   {% if request.user.skill_set.all.count > 0 %}
+                  <a href="/resume/{{request.user.id}}"><span class="btn btn-primary  py-2 px-4">View CV</span></a>
+                  <a><span class="btn btn-primary  py-2 px-4" data-toggle="modal" data-target="#exampleModal">Edit CV</span></a>
+                    {% else %}
+                    <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary  py-2 px-4"><span class="icon-plus mr-3"></span>Create CV</button>
+                    {% endif %}
+                 </div>
+               </div>
+               <div class="job-post-item-body d-block d-md-flex">
+                 <div class="mr-3"><span class="fl-bigmug-line-portfolio23"></span> <a href="#">{{request.user.email}}</a></div>
+                 <div><span class="fl-bigmug-line-big104"></span></div>
+               </div>
+              </div>
+              
+              <p>please note that when you apply for a job your current resume is uploaded as well, make sure to add relevant skills, so as to maximize your chances to finding a job</p>
+              
+            </div>
+          </div>
+          <div class="col-lg-4">
+            
+            
+            <div class="p-4 mb-3 bg-white">
+              <!-- <h3 class="h5 text-black mb-3">More Info</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ad iure porro mollitia architecto hic consequuntur. Distinctio nisi perferendis dolore, ipsa consectetur</p>-->
+              <p><h3>Featured Jobs</h3></p> 
+              <div class="nonloop-block-16 owl-carousel">
+  
+                <div class="border rounded p-4 bg-white">
+                  <h2 class="h5">Restaurant Crew</h2>
+                  <p><span class="border border-warning rounded p-1 px-2 text-warning">Freelance</span></p>
+                  <p>
+                    <span class="d-block"><span class="icon-suitcase"></span> Resto Bar</span>
+                    <span class="d-block"><span class="icon-room"></span> Florida</span>
+                    <span class="d-block"><span class="icon-money mr-1"></span> $55000 &mdash; 70000</span>
+                  </p>
+                  
+                </div>
+  
+                <div class="border rounded p-4 bg-white">
+                  <h2 class="h5">Javascript Fullstack Developer</h2>
+                  <p><span class="border border-warning rounded p-1 px-2 text-warning">Freelance</span></p>
+                  <p>
+                    <span class="d-block"><span class="icon-suitcase"></span> Resto Bar</span>
+                    <span class="d-block"><span class="icon-room"></span> Florida</span>
+                    <span class="d-block"><span class="icon-money mr-1"></span> $55000 &mdash; 70000</span>
+                  </p>
+                  
+                </div>
+  
+                <div class="border rounded p-4 bg-white">
+                  <h2 class="h5">Assistant Brooker, Real Estate</h2>
+                  <p><span class="border border-warning rounded p-1 px-2 text-warning">Freelance</span></p>
+                  <p>
+                    <span class="d-block"><span class="icon-suitcase"></span> Resto Bar</span>
+                    <span class="d-block"><span class="icon-room"></span> Florida</span>
+                    <span class="d-block"><span class="icon-money mr-1"></span> $55000 &mdash; 70000</span>
+                  </p>
+                  
+                </div>
+  
+                <div class="border rounded p-4 bg-white">
+                  <h2 class="h5">Telecommunication Manager</h2>
+                  <p><span class="border border-warning rounded p-1 px-2 text-warning">Freelance</span></p>
+                  <p>
+                    <span class="d-block"><span class="icon-suitcase"></span> Resto Bar</span>
+                    <span class="d-block"><span class="icon-room"></span> Florida</span>
+                    <span class="d-block"><span class="icon-money mr-1"></span> $55000 &mdash; 70000</span>
+                  </p>
+                 
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+    {% include 'footer.html' %}
+  </div>
+{% endblock content %}
